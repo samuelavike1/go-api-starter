@@ -14,8 +14,9 @@ type album struct {
 }
 
 type response struct {
-	Message string  `json:"message"`
-	Data    []album `json:"data"`
+	ResponseCode string  `json:"response_code"`
+	Message      string  `json:"message"`
+	Data         []album `json:"data"`
 }
 
 // albums slice to seed record album data.
@@ -28,17 +29,20 @@ var albums = []album{
 // GetAlbums responds with the list of all albums as JSON.
 func GetAlbums(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, response{
-		Message: "success",
-		Data:    albums,
+		ResponseCode: "SUCCESS",
+		Message:      "Request Successful",
+		Data:         albums,
 	})
 }
 
 func Test(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, gin.H{
-		"message": "success",
-		"data": gin.H{
-			"title": "Album Test",
-		},
+		"responseCode": "SUCCESS",
+		"message":      "success",
+		"data":         albums,
+		//"data": gin.H{
+		//	"albums": albums,
+		//},
 	})
 }
 
